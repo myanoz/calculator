@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+            },
+          },
+        },
+      };
+    </script>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-900 text-gray-100 flex place-content-center p-20">
+    <div class="flex flex-col w-96">
+      <h1 class="text-3xl font-bold text-center mb-6 hidden">Calculator</h1>
+      <div
+        id="value"
+        class="w-96 text-right p-3 pb-4 text-2xl bg-gray-800 rounded-t-lg"
+      ></div>
+      <div
+        class="grid grid-cols-4 bg-violet-500 text-xl rounded-b-lg overflow-hidden cursor-pointer"
+      >
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          7
+        </button>
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          8
+        </button>
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          9
+        </button>
+        <button
+          type="button"
+          id="divide"
+          class="hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          /
+        </button>
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          4
+        </button>
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          5
+        </button>
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          6
+        </button>
+        <button
+          type="button"
+          id="multiply"
+          class="hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          *
+        </button>
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          1
+        </button>
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          2
+        </button>
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          3
+        </button>
+        <button
+          type="button"
+          id="minus"
+          class="hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          -
+        </button>
+        <button
+          type="button"
+          id="clear-btn"
+          class="hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          C
+        </button>
+        <button
+          type="button"
+          class="num-btn hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          0
+        </button>
+        <button
+          type="button"
+          id="equals"
+          class="hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          =
+        </button>
+        <button
+          type="button"
+          id="plus"
+          class="hover:bg-violet-600 active:bg-violet-700 text-center p-3"
+        >
+          +
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
