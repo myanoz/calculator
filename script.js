@@ -12,15 +12,25 @@ let currentValue = '';
 let value1 = 0;
 let value2 = 0;
 let operator = '';
+let isEqualsOutput = false;
 
 display.innerHTML = '0';
 
 function handleNumberInput(num) {
+  if (isEqualsOutput) {
+    currentValue = '';
+    isEqualsOutput = !isEqualsOutput;
+    if (num === '0') clear();
+  }
+  //초깃값 0일때 0입력 방지
+  if (currentValue === '' && num === '0') return;
   currentValue += num;
   display.innerHTML = currentValue;
 }
 
 function handleOperatorInput(oper) {
+  if (operator !== '') {
+  }
   operator = oper;
   value1 = Number(currentValue);
   currentValue = '';
@@ -46,15 +56,22 @@ function handleEqualsInput() {
   value1 = 0;
   value2 = 0;
   operator = '';
+  isEqualsOutput = !isEqualsOutput;
 }
 
 function handleClearInput() {
+  clear();
+}
+
+function clear() {
   currentValue = '';
   value1 = 0;
   value2 = 0;
   operator = '';
   display.innerHTML = '0';
 }
+
+// 각 버튼에 이벤트 리스너 등록
 
 numButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
