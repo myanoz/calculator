@@ -1,66 +1,77 @@
-const display = document.querySelector("#value");
-const buttons = document.querySelectorAll("button");
-const numButtons = document.querySelectorAll(".num-btn");
-const clearButton = document.querySelector("#clear-btn");
-const plusButton = document.querySelector("#plus");
-const minusButton = document.querySelector("#minus");
-const multiplyButton = document.querySelector("#multiply");
-const divideButton = document.querySelector("#divide");
-const equalsButton = document.querySelector("#equals");
-let value = 0;
+const display = document.querySelector('#value');
+const buttons = document.querySelectorAll('button');
+const numButtons = document.querySelectorAll('.num-btn');
+const clearButton = document.querySelector('#clear-btn');
+const plusButton = document.querySelector('#plus');
+const minusButton = document.querySelector('#minus');
+const multiplyButton = document.querySelector('#multiply');
+const divideButton = document.querySelector('#divide');
+const equalsButton = document.querySelector('#equals');
+let value = '';
 let value2 = 0;
-let operator = "";
+let log = '';
+let operator = '';
 
-display.innerHTML = "0";
+display.innerHTML = '0';
 
-function handleNumber() {
-  if (display.innerHTML.trim() === "0") {
-    //기존에 표시된 값이 0일 때
-    if (btn.innerHTML.trim() === "0") {
-      //클릭한 숫자가 0일 때
-      return; //입력을 받지 않음
-    } else {
-      //클릭한 숫자가 0이 아닐 때
-      display.innerHTML = ""; //앞의 0을 없애고 밑에서 숫자를 할당받을 것임
-    }
-  } else if (isNaN(display.innerHTML.trim())) {
-    //기존에 표시된 값이 숫자가 아니고 연산기호일 때
-    display.innerHTML = "";
+function handleNumberInput(num) {
+  const lastInput = log.slice(-1);
+  if (lastInput === '' || typeof Number(lastInput) === 'number') {
+    console.log(num);
+    log += num;
+    value += num;
+    display.innerHTML = value;
+  } else {
+    console.log('+');
+    log += num;
+    value2 += num;
+    display.innerHTML = value2;
   }
-  display.innerHTML += btn.innerHTML.trim();
+}
+
+function handleOperatorInput(operator) {
+  switch (operator) {
+    case 'plus':
+      log += '+';
+  }
+}
+
+function handleEqualsInput() {
+  display.innerHTML = Number(value) + Number(value2);
+  log = '';
+}
+
+function handleClearInput() {
+  log = '';
+  value = '';
+  value2 = '';
+  display.innerHTML = '0';
 }
 
 numButtons.forEach((btn) => {
-  btn.addEventListener("click", handleNumber);
+  btn.addEventListener('click', () => {
+    handleNumberInput(btn.innerHTML.trim());
+  });
 });
 
-plusButton.addEventListener("click", () => {
-  operator = "plus";
-  value = Number(display.innerHTML.trim());
-  display.innerHTML = "+";
+plusButton.addEventListener('click', () => {
+  handleOperatorInput('plus');
 });
 
-minusButton.addEventListener("click", () => {
-  display.innerHTML = "0";
+minusButton.addEventListener('click', () => {});
+
+multiplyButton.addEventListener('click', () => {});
+
+divideButton.addEventListener('click', () => {});
+
+equalsButton.addEventListener('click', () => {
+  handleEqualsInput;
 });
 
-multiplyButton.addEventListener("click", () => {
-  display.innerHTML = "0";
-});
-
-divideButton.addEventListener("click", () => {
-  display.innerHTML = "0";
-});
-
-equalsButton.addEventListener("click", () => {
-  value2 = Number(display.innerHTML.trim());
-  if (operator === "plus") {
-    display.innerHTML = value + value2;
-  }
-});
-
-clearButton.addEventListener("click", () => {
-  display.innerHTML = "0";
-});
+clearButton.addEventListener('click', handleClearInput);
 
 //경우를 나눌때 맨처음에 그냥 모든버튼.forEach 안에서 다 해결하자
+
+let n = 1;
+n.push(2);
+console.log(n);
