@@ -7,71 +7,78 @@ const minusButton = document.querySelector('#minus');
 const multiplyButton = document.querySelector('#multiply');
 const divideButton = document.querySelector('#divide');
 const equalsButton = document.querySelector('#equals');
-let value = '';
+
+let currentValue = '';
+let value1 = 0;
 let value2 = 0;
-let log = '';
 let operator = '';
 
 display.innerHTML = '0';
 
 function handleNumberInput(num) {
-  const lastInput = log.slice(-1);
-  if (lastInput === '' || typeof Number(lastInput) === 'number') {
-    console.log(num);
-    log += num;
-    value += num;
-    display.innerHTML = value;
-  } else {
-    console.log('+');
-    log += num;
-    value2 += num;
-    display.innerHTML = value2;
-  }
+  currentValue += num;
+  display.innerHTML = currentValue;
 }
 
-function handleOperatorInput(operator) {
-  switch (operator) {
-    case 'plus':
-      log += '+';
-  }
+function handleOperatorInput(oper) {
+  operator = oper;
+  value1 = Number(currentValue);
+  currentValue = '';
 }
 
 function handleEqualsInput() {
-  display.innerHTML = Number(value) + Number(value2);
-  log = '';
+  value2 = Number(currentValue);
+  switch (operator) {
+    case 'PLUS':
+      currentValue = value1 + value2;
+      break;
+    case 'MINUS':
+      currentValue = value1 - value2;
+      break;
+    case 'MULTIPLY':
+      currentValue = value1 * value2;
+      break;
+    case 'DIVIDE':
+      currentValue = value1 / value2;
+      break;
+  }
+  display.innerHTML = currentValue;
+  value1 = 0;
+  value2 = 0;
+  operator = '';
 }
 
 function handleClearInput() {
-  log = '';
-  value = '';
-  value2 = '';
+  currentValue = '';
+  value1 = 0;
+  value2 = 0;
+  operator = '';
   display.innerHTML = '0';
 }
 
 numButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
-    handleNumberInput(btn.innerHTML.trim());
+    const inputNumber = btn.innerHTML.trim();
+    handleNumberInput(inputNumber);
   });
 });
 
 plusButton.addEventListener('click', () => {
-  handleOperatorInput('plus');
+  handleOperatorInput('PLUS');
 });
 
-minusButton.addEventListener('click', () => {});
-
-multiplyButton.addEventListener('click', () => {});
-
-divideButton.addEventListener('click', () => {});
-
-equalsButton.addEventListener('click', () => {
-  handleEqualsInput;
+minusButton.addEventListener('click', () => {
+  handleOperatorInput('MINUS');
 });
+
+multiplyButton.addEventListener('click', () => {
+  handleOperatorInput('MULTIPLY');
+});
+
+divideButton.addEventListener('click', () => {
+  handleOperatorInput('DIVIDE');
+});
+
+equalsButton.addEventListener('click', handleEqualsInput);
 
 clearButton.addEventListener('click', handleClearInput);
-
-//경우를 나눌때 맨처음에 그냥 모든버튼.forEach 안에서 다 해결하자
-
-let n = 1;
-n.push(2);
-console.log(n);
