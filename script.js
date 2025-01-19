@@ -30,6 +30,7 @@ function handleNumberInput(num) {
 
 function handleOperatorInput(oper) {
   if (operator !== '') {
+    handleEqualsInput();
   }
   operator = oper;
   value1 = Number(currentValue);
@@ -38,25 +39,35 @@ function handleOperatorInput(oper) {
 
 function handleEqualsInput() {
   value2 = Number(currentValue);
+  if (operator === '') return;
+
+  let result;
   switch (operator) {
     case 'PLUS':
-      currentValue = value1 + value2;
+      result = value1 + value2;
       break;
     case 'MINUS':
-      currentValue = value1 - value2;
+      result = value1 - value2;
       break;
     case 'MULTIPLY':
-      currentValue = value1 * value2;
+      result = value1 * value2;
       break;
     case 'DIVIDE':
-      currentValue = value1 / value2;
+      if (value2 === 0) {
+        clear();
+        display.innerHTML = 'Error';
+        return;
+      }
+      result = value1 / value2;
       break;
   }
+
+  currentValue = String(Number(result.toFixed(10)));
   display.innerHTML = currentValue;
   value1 = 0;
   value2 = 0;
   operator = '';
-  isEqualsOutput = !isEqualsOutput;
+  isEqualsOutput = true;
 }
 
 function handleClearInput() {

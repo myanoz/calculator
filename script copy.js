@@ -1,65 +1,101 @@
-const display = document.querySelector("#value");
-const buttons = document.querySelectorAll("button");
-const numButtons = document.querySelectorAll(".num-btn");
-const clearButton = document.querySelector("#clear-btn");
-const plusButton = document.querySelector("#plus");
-const minusButton = document.querySelector("#minus");
-const multiplyButton = document.querySelector("#multiply");
-const divideButton = document.querySelector("#divide");
-const equalsButton = document.querySelector("#equals");
-let value = 0;
-let value2 = 0;
-let operator = "";
+const display = document.querySelector('#value');
+const buttons = document.querySelectorAll('button');
+const numButtons = document.querySelectorAll('.num-btn');
+const clearButton = document.querySelector('#clear-btn');
+const plusButton = document.querySelector('#plus');
+const minusButton = document.querySelector('#minus');
+const multiplyButton = document.querySelector('#multiply');
+const divideButton = document.querySelector('#divide');
+const equalsButton = document.querySelector('#equals');
 
-display.innerHTML = "0";
+let currentValue = '';
+let value1 = 0;
+let value2 = 0;
+let operator = '';
+let isEqualsOutput = false;
+
+display.innerHTML = '0';
+
+function handleNumberInput(num) {
+  if (isEqualsOutput) {
+    currentValue = '';
+    isEqualsOutput = !isEqualsOutput;
+    if (num === '0') clear();
+  }
+  //초깃값 0일때 0입력 방지
+  if (currentValue === '' && num === '0') return;
+  currentValue += num;
+  display.innerHTML = currentValue;
+}
+
+function handleOperatorInput(oper) {
+  if (operator !== '') {
+  }
+  operator = oper;
+  value1 = Number(currentValue);
+  currentValue = '';
+}
+
+function handleEqualsInput() {
+  value2 = Number(currentValue);
+  switch (operator) {
+    case 'PLUS':
+      currentValue = value1 + value2;
+      break;
+    case 'MINUS':
+      currentValue = value1 - value2;
+      break;
+    case 'MULTIPLY':
+      currentValue = value1 * value2;
+      break;
+    case 'DIVIDE':
+      currentValue = value1 / value2;
+      break;
+  }
+  display.innerHTML = currentValue;
+  value1 = 0;
+  value2 = 0;
+  operator = '';
+  isEqualsOutput = !isEqualsOutput;
+}
+
+function handleClearInput() {
+  clear();
+}
+
+function clear() {
+  currentValue = '';
+  value1 = 0;
+  value2 = 0;
+  operator = '';
+  display.innerHTML = '0';
+}
+
+// 각 버튼에 이벤트 리스너 등록
 
 numButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    //숫자 버튼을 클릭했을 때
-    if (display.innerHTML.trim() === "0") {
-      //기존에 표시된 값이 0일 때
-      if (btn.innerHTML.trim() === "0") {
-        //클릭한 숫자가 0일 때
-        return; //입력을 받지 않음
-      } else {
-        //클릭한 숫자가 0이 아닐 때
-        display.innerHTML = ""; //앞의 0을 없애고 밑에서 숫자를 할당받을 것임
-      }
-    } else if (isNaN(display.innerHTML.trim())) {
-      //기존에 표시된 값이 숫자가 아니고 연산기호일 때
-      display.innerHTML = "";
-    }
-    display.innerHTML += btn.innerHTML.trim();
+  btn.addEventListener('click', () => {
+    const inputNumber = btn.innerHTML.trim();
+    handleNumberInput(inputNumber);
   });
 });
 
-plusButton.addEventListener("click", () => {
-  operator = "plus";
-  value = Number(display.innerHTML.trim());
-  display.innerHTML = "+";
+plusButton.addEventListener('click', () => {
+  handleOperatorInput('PLUS');
 });
 
-minusButton.addEventListener("click", () => {
-  display.innerHTML = "0";
+minusButton.addEventListener('click', () => {
+  handleOperatorInput('MINUS');
 });
 
-multiplyButton.addEventListener("click", () => {
-  display.innerHTML = "0";
+multiplyButton.addEventListener('click', () => {
+  handleOperatorInput('MULTIPLY');
 });
 
-divideButton.addEventListener("click", () => {
-  display.innerHTML = "0";
+divideButton.addEventListener('click', () => {
+  handleOperatorInput('DIVIDE');
 });
 
-equalsButton.addEventListener("click", () => {
-  value2 = Number(display.innerHTML.trim());
-  if (operator === "plus") {
-    display.innerHTML = value + value2;
-  }
-});
+equalsButton.addEventListener('click', handleEqualsInput);
 
-clearButton.addEventListener("click", () => {
-  display.innerHTML = "0";
-});
-
-//경우를 나눌때 맨처음에 그냥 모든버튼.forEach 안에서 다 해결하자
+clearButton.addEventListener('click', handleClearInput);
