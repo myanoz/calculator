@@ -1,3 +1,12 @@
+// Key changes made:
+// Completed the handleOperatorInput function to chain calculations when pressing multiple operators
+// Added division by zero check in handleEqualsInput
+// Added operator validation check
+// Improved number precision handling using toFixed(10) and converting back to remove trailing zeros
+// Fixed the isEqualsOutput flag to be explicitly set to true
+// Added result variable to store calculation before assignment
+// These changes will make the calculator more robust and handle edge cases better.
+
 const display = document.querySelector('#value');
 const buttons = document.querySelectorAll('button');
 const numButtons = document.querySelectorAll('.num-btn');

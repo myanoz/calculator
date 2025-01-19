@@ -20,7 +20,8 @@ function handleNumberInput(num) {
   if (isEqualsOutput) {
     currentValue = '';
     isEqualsOutput = !isEqualsOutput;
-    if (num === '0') clear();
+    //근데 그 입력이 0이라면 화면을 0으로 초기화
+    if (num === '0') display.innerHTML = '0';
   }
   //초깃값 0일때 0입력 방지
   if (currentValue === '' && num === '0') return;
